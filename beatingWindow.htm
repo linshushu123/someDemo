@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>弹跳的窗口</title>
+        <style>
+        * {
+        	margin: 0;
+        	padding: 0;
+        }
+        html,body {
+        	width: 100%;
+        	height: 100%;
+        }
+        div {
+        	position: absolute;
+        	width: 100px;
+        	height: 100px;
+        	background: pink;
+        }
+        </style>
+    </head>
+    <body>
+    	<div id="box"></div>
+    </body>
+    <script>
+   //对象封装
+    var moveWin = {
+    	init : function(elm){
+    		this.target = document.getElementById(elm);
+    		
+    		this.leftOn = 0;
+    		this.topOn = 0;
+    		this.leftP = 0;
+    		this.topP = 0;
+    		this.offsetW = this.target.offsetWidth;
+    		this.offsetH = this.target.offsetHeight;
+    		this.clientW = document.body.clientWidth;
+    		this.clientH = document.body.clientHeight;
+    		this.start();
+    		this.hover(this.target);
+    	},
+    	changeP : function(){
+    		if(this.leftOn){
+    			this.leftP++
+    		}else {
+    			this.leftP--
+    		}
+    		if(this.leftP < 0){
+    			this.leftOn= 1;
+    			this.leftP =0;
+    		}else if(this.leftP >= this.clientW - this.offsetW){
+    			this.leftOn = 0;
+    			this.leftP =this.clientW - this.offsetW;
+    		}
+    		if(this.topOn){
+    			this.topP++
+    		}else {
+    			this.topP--
+    		}
+    		if(this.topP < 0){
+    			this.topOn = 1;
+    			this.topP = 0
+    		}else if(this.topP >= this.clientH - this.offsetH){
+    			this.topOn = 0;
+    			this.topP = this.clientH - this.offsetH;
+    		}
+    		this.target.style.left = this.leftP + 'px';
+    		this.target.style.top = this.topP + 'px';
+    	},
+    	start : function(){
+    		var that = this;
+    		this.timer = setInterval(function(){
+    			that.changeP();
+    		},30)
+    	},
+    	hover : function(elm){
+    		var that = this;
+    		elm.onmouseover = function(){
+    			console.log(1);
+    			clearInterval(that.timer);
+    		}
+    		elm.onmouseout = function(){
+    			that.timer = setInterval(function(){
+    			that.changeP();
+    		},30)
+    		}
+    	}
+    }
+
+    //替换原型封装
+    function MoveWindow(elm){
+    	this.init(elm)
+    }
+    MoveWindow.prototype = {
+    	init : function(elm){
+    		this.target = document.getElementById(elm);
+    		this.leftOn = 0;
+    		this.topOn = 0;
+    		this.leftP = 0;
+    		this.topP = 0;
+    		this.offsetW = this.target.offsetWidth;
+    		this.offsetH = this.target.offsetHeight;
+    		this.clientW = document.body.clientWidth;
+    		this.clientH = document.body.clientHeight;
+    		this.start();
+    		this.hover(this.target);
+    		//this.hover(this.target);
+    	},
+    	changeP : function(){
+    		if(this.leftOn){
+    			this.leftP++
+    		}else {
+    			this.leftP--
+    		}
+    		if(this.leftP < 0){
+    			this.leftOn = 1;
+    		}else if(this.leftP >= this.clientW - this.offsetW){
+    			this.leftOn = 0;
+    		}
+    		if(this.topOn){
+    			this.topP++
+    		}else {
+    			this.topP--
+    		}
+    		if(this.topP < 0){
+    			this.topOn = 1;
+    		}else if(this.topP >= this.clientH - this.offsetH){
+    			this.topOn = 0;
+    		}
+    		
+    		this.target.style.left = this.leftP + 'px';
+    		this.target.style.top = this.topP + 'px';
+
+    	},
+    	start : function(){
+
+    		var that = this;
+    		this.timer = setInterval(function(){
+    			that.changeP();
+    		},30)
+    	},
+    	hover : function(elm){
+    		var that = this;
+    		elm.onmouseover = function(){
+    			clearInterval(that.timer);
+    		}
+    		elm.onmouseout = function(){
+    			that.timer = setInterval(function(){
+    			that.changeP();
+    		},30)
+    		}
+    	}
+    }
+    var box = new MoveWindow('box');
+    </script>
+</html>
