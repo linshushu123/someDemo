@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+        <title>rem布局</title>
+        <style>
+         * {
+         	margin: 0;
+         	padding: 0;
+         }
+         html {
+         	font-size: 100px;
+            font-family: "Microsoft Yahei";
+         }
+         ul {
+         	list-style: none;
+         }
+         div,ul,li,h1,h2,h3,h4,h5,h6 {
+         	-webkit-box-sizing: border-box;
+         	box-sizing: border-box;
+         }
+         input {
+         	border: none;
+            outline-style: none;
+         	-webkit-appearance: none;
+         }
+         img {
+            vertical-align: top;
+         }
+         h1,h2,h3,h4,h5,h6,i,b {
+            font-weight: normal;
+            font-style: normal;
+         }
+         .header {
+            width: 6.4rem;
+            height: 3.32rem;
+         }
+         .header .search {
+            position: fixed;
+            z-index: 99;
+            width: 100%;
+         	height: 0.85rem;
+         	padding: 0.15rem 0 0.15rem 0.25rem;
+         }
+         .header .search.active {
+            background: #00b38a;
+            opacity: 0.3;
+         }
+         .header .search-box {
+            float: left;
+         	width: 5.34rem;
+         	height: 0.55rem;
+         	background-color: #fff;
+            text-align: center;
+            font-size: 0.2rem;
+            letter-spacing: 0.02rem;
+         	-webkit-border-radius: 25px;
+         	border-radius: 25px;
+         }
+         .header .search.active .search-box{
+            background: #0aa37f;
+         }
+         .header .search.active .search-box::-webkit-input-placeholder{
+            color:#fff;
+         }
+         .header .scan {
+            float: left;
+            width: 0.35rem;
+            height: 0.35rem;
+            margin: 0.1rem 0 0 0.15rem;
+            background: url(images/saomiao.png) center;
+            background-size: 100%;
+         }
+         .header .banner {
+            position: relative;
+            overflow: hidden;
+            width: 6.4rem;
+            height: 3.32rem;
+         }
+         .header .banner-box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200%;
+            height: 100%;
+         }
+         .header .banner-box .item {
+            float: left;
+         }
+         .banner-box .item img {
+            width: 6.4rem;
+            height: 3.32rem;
+         }
+         .header .sport-box {
+            position: absolute;
+            bottom: 0.18rem;
+            left: 50%;
+         }
+         .header .sport-box .sport {
+            float: left;
+            width: 0.08rem;
+            height: 0.08rem;
+            margin-right: 0.1rem;
+            background-color: orange;
+            -webkit-border-radius: 50%;
+            border-radius: 0.05rem;
+         }
+         .header .sport-box .sport.active {
+            width: 0.16rem;
+         }
+         .nav {
+            width: 6.4rem;
+            height: 1.8rem;
+            background: #fff;
+         }
+         .nav .nav-box {
+            width: 100%;
+            height: 100%;
+         }
+         .nav .nav-item {
+            position: relative;
+            float: left;
+            width: 25%;
+            height: 100%;
+            text-align: center;
+         }
+         .nav .nav-pic {
+            position: absolute;
+            top: 0.26rem;
+            width: 100%;
+            height: 0.78rem;
+         }
+         .nav .nav-pic img {
+            width: 0.78rem;
+            height: 0.78rem;
+         }
+         .nav .nav-title {
+            position: absolute;
+            top:1.27rem;
+            width: 100%;
+            letter-spacing: 2px;
+            font-weight: 500;
+            text-align: center;
+            font-size: 0.22rem;
+         }
+         .h18 {
+            height: 0.18rem;
+            background: #F0F1F5;
+         }
+         .recommend-title {
+            height: 0.81rem;
+            width: 100%;
+            border-bottom: 1px solid #F2F3F4;
+            font-size: 0.26rem;
+            line-height: 0.81rem;
+            padding-left: 0.25rem;
+         }
+         .info .item {
+            width: 6.4rem;
+            height: 1.93rem;
+         }
+         .info .item .logo-pic {
+            float: left;
+            width: 1.6rem;
+            height: 100%;
+            padding-top: 0.23rem;
+            text-align: center;
+         }
+         .info .logo-pic img {
+            width: 1.16rem;
+            height: 1.16rem;
+         }
+         .info .item .info-con {
+            float: left;
+            width: 4.8rem;
+            height: 100%;
+            padding-top: 0.23rem;
+            padding-right: 0.22rem;
+            border-bottom: 1px solid #F2F2F2;
+         }
+         .info .info-con h3 {
+            height: 0.42rem;
+            font-size: 0.26rem;
+            line-height: 0.26rem;
+         }
+         .info .info-con h3 b {
+            display: inline-block;
+            width: 0.3rem;
+            height: 0.3rem;
+            margin-top: ;
+            background: url(images/msg.png) no-repeat center;
+         }
+         .info .info-con h3 .wage {
+            float: right;
+            font-size: 0.2rem;
+            font-weight: 600;
+            color: #FF552B;
+         }
+         .info .info-con h4 {
+            height: 0.47rem;
+            font-size: 0.24rem;
+         }
+         .info .info-con p {
+            height: 0.36rem;
+            color: #929292;
+            font-weight: 500;
+         }
+         .info .info-con .address {
+            font-size: 0.22rem;
+         }
+         .info .info-con .company-info {
+            text-size-adjust: none;
+            font-size: 0.12rem;
+
+         }
+         .info .info-con p .data {
+            float: right;
+            color: #CFCFCF;
+         }
+        </style>
+    </head>
+    <body>
+        <!-- 重置fontsize -->
+        <script id="J_setFont">
+            (function(){
+                var screen = document.body.clientWidth;
+                var html = document.querySelector('html');
+                html.style.fontSize = (screen/640) * 100 + 'px';
+                var target = document.getElementById('J_setFont');
+                target.parentNode.removeChild(target);
+            })();
+        </script>
+    	<!-- 头部部分start -->
+		<div class="header">
+			<div id="J_search" class="search">
+				<input class="search-box" placeholder="搜索职位/公司/商区">
+                <div class="scan"></div>
+			</div>
+            <div id="J_banner" class="banner">
+                <ul class="banner-box">
+                    <li class="item"><img src="images/ban1.jpg" height="332" width="640" alt=""></li>
+                    <li class="item"><img src="images/ban2.jpg" height="332" width="640" alt=""></li>
+                </ul>
+                <ul class="sport-box">
+                    <li class="sport active"></li>
+                    <li class="sport"></li>
+                </ul>
+            </div>
+		</div>
+        <!-- nav部分 -->
+        <div class="nav">
+            <ul class="nav-box">
+                <li class="nav-item">
+                    <div class="nav-pic"><img src="images/nav1.png" height="78" width="78" alt=""></div>
+                    <p class="nav-title">日常任务</p>
+                </li>
+                <li class="nav-item">
+                    <div class="nav-pic"><img src="images/nav-2.png" height="78" width="78" alt=""></div>
+                    <p class="nav-title">直播LIVE</p>
+                </li>
+                <li class="nav-item">
+                    <div class="nav-pic"><img src="images/nav-3.png" height="78" width="78" alt=""></div>
+                    <p class="nav-title">首发专场</p>
+                </li>
+                <li class="nav-item">
+                    <div class="nav-pic"><img src="images/nav-4.png" height="78" width="78" alt=""></div>
+                    <p class="nav-title">城市专场</p>
+                </li>
+            </ul>
+        </div>
+        <!-- 分割线 -->
+        <div class="h18"></div>
+        <!-- 标题 -->
+        <h2 class="recommend-title">为你推荐的好职位</h2>
+        <!-- 招聘信息 -->
+        <div class="info">
+            <ul class="info-box">
+                <li class="item">
+                    <div class="logo-pic">
+                        <img src="images/lg1.png" height="116" width="116" alt="">
+                    </div>
+                    <div class="info-con">
+                        <h3>前端实习生<b></b><span class="wage">3k-4k</span></h3>
+                        <h4>闪电购</h4>
+                        <p class="address">杭州&nbsp;西湖区&nbsp;经验不限&nbsp;本科<span class="data">05月17日</span></p>
+                        <p class="company-info">C轮&nbsp;<i>|</i>&nbsp;500-2000人&nbsp;<i>|</i>&nbsp;移动互联网,O2O</p>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="logo-pic">
+                        <img src="images/lg2.png" height="116" width="116" alt="">
+                    </div>
+                    <div class="info-con">
+                        <h3>前端实习生<b></b><span class="wage">3k-4k</span></h3>
+                        <h4>边锋</h4>
+                        <p class="address">杭州&nbsp;西湖区&nbsp;经验不限&nbsp;本科<span class="data">05月17日</span></p>
+                        <p class="company-info">不需要融资&nbsp;<i>|</i>&nbsp;500-2000人&nbsp;<i>|</i>&nbsp;移动互联网,游戏</p>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="logo-pic">
+                        <img src="images/lg1.png" height="116" width="116" alt="">
+                    </div>
+                    <div class="info-con">
+                        <h3>前端实习生<b></b><span class="wage">3k-4k</span></h3>
+                        <h4>闪电购</h4>
+                        <p class="address">杭州&nbsp;西湖区&nbsp;经验不限&nbsp;本科<span class="data">05月17日</span></p>
+                        <p class="company-info">C轮&nbsp;<i>|</i>&nbsp;500-2000人&nbsp;<i>|</i>&nbsp;移动互联网,O2O</p>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="logo-pic">
+                        <img src="images/lg2.png" height="116" width="116" alt="">
+                    </div>
+                    <div class="info-con">
+                        <h3>前端实习生<b></b><span class="wage">3k-4k</span></h3>
+                        <h4>边锋</h4>
+                        <p class="address">杭州&nbsp;西湖区&nbsp;经验不限&nbsp;本科<span class="data">05月17日</span></p>
+                        <p class="company-info">不需要融资&nbsp;<i>|</i>&nbsp;500-2000人&nbsp;<i>|</i>&nbsp;移动互联网,游戏</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </body>
+    <script src="js/index.js"></script>
+</html>
