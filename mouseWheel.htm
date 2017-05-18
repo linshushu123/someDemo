@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="鼠标滚轮事件">
+        <meta name="keywords" content="鼠标滚轮事件">
+        <title>鼠标滚轮事件</title>
+        <style>
+	        * {
+	        	margin: 0;
+	        	padding: 0;
+	        }
+	        html,body {
+	        	width: 100%;
+	        	height: 100%;
+
+	        }
+	        body {
+	        	overflow-y: hidden;
+	        }
+	        ul {
+	        	list-style: none;
+	        }
+	        .wrap {
+	        	position: absolute;
+	        	top: 0;
+	        	left: 0;
+	        	width: 100%;
+	        	height: 100%;
+	        }
+	        .div {
+	        	height: 100%;
+	        }
+	        .div1,.div5 {
+	        	background: pink;
+	        }
+	        .div2,.div4 {
+	        	background: orange;
+	        }
+	        .div3 {
+	        	background: skyblue;
+	        }
+	        .point {
+				position: fixed;
+				right: 100px;
+				top: 50%;
+				z-index: 999;
+	        }
+	        .point .item {
+	        	width: 20px;
+	        	height: 20px;
+	        	margin-bottom: 10px;
+	        	background: #f40;
+	        	border: 5px solid rgba(0,0,0,0);
+	        	border-radius: 50%;
+	        }
+	        .point .item.active {
+	        	background: #fff;
+	        }
+        </style>
+    </head>
+    <body>
+    	<div id="wrap" class="wrap">
+    		<div class="div div1"></div>
+	    	<div class="div div2"></div>
+	    	<div class="div div3"></div>
+	    	<div class="div div4"></div>
+	    	<div class="div div5"></div>
+    	</div>
+    	<ul id="point" class="point">
+    	</ul>
+    </body>
+</html>
+<script type="text/javascript">
+// function MouseWheel(wrap,point){
+//     		this.wrap = document.getElementById(wrap);
+//     		this.point = document.getElementById(point);
+//     	}
+	var count = 0;	// 记录当前在第几个page
+	var wrap = document.getElementById('wrap');
+	var point = document.getElementById('point');
+	var wrapList = wrap.children;
+	var winH = wrapList[0].offsetHeight;	//page的高度
+	var upflag = true;		//开关
+	var downflag = true;		//开关
+    	wheel(wrap,point)
+    //滚动函数封装
+	function wheel(wrap,point){
+		var len = wrap.children.length;
+		//生成侧边栏按钮
+		for(var i = 0 ; i < len ; i++){
+			var li = document.createElement('li');
+			li.className = 'item';
+			point.appendChild(li);
+    	}
+    	var points = point.children;
+    	point.style.marginTop = -1*point.offsetHeight/2 + 'px';
+    	points[0].className+=' active';
+    	//鼠标滚动事件
+		window.onmousewheel = function(e){
+    		var e = e || window.event;
+    		//e.wheelDelta小于0 ，则代表页面向上翻
+    		if(e.wheelDelta < 0){
+    			if(upflag){
+    				count++
+    				count = count > len-1 ? len-1 : count;
+    				upflag = false;
+    			}
+    			animate(wrap,{top:-1 * count * winH},function(){
+					upflag = true;
+					console.log('我到了')
+    			})
+    		}
+    		if(e.wheelDelta > 0){
+    			if(downflag){
+    				count--;
+    				count = count < 0 ? 0 : count;
+    				downflag = false; 			
+    			}
+    			animate(wrap,{top:-1 * count * winH},function(){
+					downflag = true;
+    			})
+    		}
+    		for(var i = 0 ; i < len ; i++){
+    			points[i].className = 'item';
+    		}
+    		points[count].className+= ' active';
+    	}
+	}
+    //运动框架
+	function animate(elm,json,callback){
+		clearInterval(elm.timer);
+		elm.timer = setInterval(function(){
+			var flag = true;
+			for(var attr in json){
+				var current = 0;
+				if(attr == 'opacity'){
+					current = getStyle(elm,attr)*100
+				}else {
+					current = parseInt(getStyle(elm,attr))
+				}
+				var step = (json[attr] - current) / 10;
+				step = step > 0 ? Math.ceil(step) : Math.floor(step);
+				if(attr == 'opacity'){
+					if('opacity' in elm.style){
+						elm.style[attr] = (current + step ) / 100;
+					}else {
+						elm.style.filter = 'aplha(opacity = '+ (current + step) +')';
+					}
+				}else if(attr == 'zIndex'){
+					elm.style[attr] = json[attr];
+				}else {
+					elm.style[attr] = current + step + 'px';
+				}
+				if(current != json[attr]){
+					flag = false
+				}
+			}
+			if(flag){
+				clearInterval(elm.timer);
+				callback && callback();
+			}
+		}, 30)
+	}
+	//获取当前样式
+	function getStyle(elm,attr){
+		if(elm.currentStyle){
+			return elm.currentStyle[attr]
+		}else {
+			return window.getComputedStyle(elm,null)[attr]
+		}
+	}
+        
+</script>
