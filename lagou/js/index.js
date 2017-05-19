@@ -2,7 +2,7 @@
 * @Author: miss
 * @Date:   2017-05-18 16:27:18
 * @Last Modified by:   miss
-* @Last Modified time: 2017-05-19 10:14:40
+* @Last Modified time: 2017-05-19 10:20:22
 */
 //顶部搜索框透明度
 searchScroll();
@@ -59,7 +59,7 @@ ScrollX.prototype = {
 			left+=moveX;
 
 			if(moveX < 0){
-				if(Math.abs(moveX) > distance){
+				if(moveX <  (-1 * distance)){
 					that.count++;
 				}
 				elm.style.transition = 'left 0.5s linear';
