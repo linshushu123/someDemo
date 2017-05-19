@@ -2,23 +2,22 @@
 * @Author: miss
 * @Date:   2017-05-18 16:27:18
 * @Last Modified by:   miss
-* @Last Modified time: 2017-05-19 12:59:34
+* @Last Modified time: 2017-05-19 13:50:53
 */
 //顶部搜索框透明度
-searchScroll();
+
 function searchScroll(){
 	var search = document.getElementById('J_search');
-	window.onscroll = function(){
-		if(document.body.scrollTop > 0 ){
-			search.className += ' active';
-			var opacityVal = document.body.scrollTop / 332 + 0.3;
-			opacityVal = opacityVal > 1 ? 1 : opacityVal;
-			search.style.opacity = opacityVal;
-		}else {
-			search.className = 'search';
-			search.style.opacity = 1;
-		}
+	if(document.body.scrollTop > 0 ){
+		search.className += ' active';
+		var opacityVal = document.body.scrollTop / 332 + 0.3;
+		opacityVal = opacityVal > 1 ? 1 : opacityVal;
+		search.style.opacity = opacityVal;
+	}else {
+		search.className = 'search';
+		search.style.opacity = 1;
 	}
+	
 }
 
 //banner效果
@@ -76,7 +75,6 @@ ScrollX.prototype = {
 			if(left > 0) {
 				left = 0
 			}
-			console.log(that.screenWidth * (that.len-1));
 			elm.style.left = left + 'px';
 			for(var i = 0 ; i < that.len ; i++){
 				that.sportBox.children[i].className = 'sport';
@@ -92,36 +90,54 @@ ScrollX.prototype = {
 var banScroll = new ScrollX('J_banner');
 
 //加载更多
-getLoading('J_load','J_infoBox');
+
 function getLoading(elm,infoBox){
 	var target = document.getElementById(elm);
 	var infoBox = document.getElementById(infoBox);
-	target.addEventListener('touchstart',function(){
-		var template = '';
-		var template_init = '';
-		var reg = /{{(\w+)}}/;
-		ajax('template.htm','get',function(data){
-			template = data;
-			template_init = data;
-		})
-		ajax('info.json','get',function(data){
-
-			var data = JSON.parse(data);
-			var result = '';
-			var strHtml = '';
-			
-			for(var i = 0 ; i < data.length ; i++){
-				template = template_init;
-				while(result = reg.exec(template)){
-					var key = result[1];
-					var value = data[i][key];
-					template = template.replace(result[0],value);
-				}
-				strHtml +=template;
-			}
-			infoBox.innerHTML+=strHtml;
-		})
+	var template = '';
+	var template_init = '';
+	var reg = /{{(\w+)}}/;
+	ajax('template.htm','get',function(data){
+		template = data;
+		template_init = data;
 	})
+	ajax('info.json','get',function(data){
+		var data = JSON.parse(data);
+		var result = '';
+		var strHtml = '';
+		
+		for(var i = 0 ; i < data.length ; i++){
+			template = template_init;
+			while(result = reg.exec(template)){
+				var key = result[1];
+				var value = data[i][key];
+				template = template.replace(result[0],value);
+			}
+			strHtml +=template;
+		}
+		infoBox.innerHTML+=strHtml;
+	})
+}
+//滑到底部加载更多
+upMoveLoad('J_load');
+function upMoveLoad(elm){
+	
+	var allH = document.body.offsetHeight;
+	var clientH = screen.height;
+	window.onscroll = function(){
+		searchScroll();
+		var scrollT = document.body.scrollTop;
+		if((scrollT + clientH + 3) > allH){
+			elm.innerHTML = '加载中...';
+			getLoading('J_load','J_infoBox');
+		}else {
+			elm.innerHTML = '上拉加载更多';
+		}
+		allH = document.body.offsetHeight;
+	}
+	
+	
+	
 }
 //底部menu点击
 setActive('J_footerMenuBox');
