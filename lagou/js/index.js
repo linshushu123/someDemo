@@ -2,7 +2,7 @@
 * @Author: miss
 * @Date:   2017-05-18 16:27:18
 * @Last Modified by:   miss
-* @Last Modified time: 2017-05-19 13:50:53
+* @Last Modified time: 2017-05-19 14:06:16
 */
 //顶部搜索框透明度
 
@@ -97,6 +97,7 @@ function getLoading(elm,infoBox){
 	var template = '';
 	var template_init = '';
 	var reg = /{{(\w+)}}/;
+	target.innerHTML = '加载中...';
 	ajax('template.htm','get',function(data){
 		template = data;
 		template_init = data;
@@ -121,17 +122,17 @@ function getLoading(elm,infoBox){
 //滑到底部加载更多
 upMoveLoad('J_load');
 function upMoveLoad(elm){
-	
+	var target = document.getElementById(elm);
 	var allH = document.body.offsetHeight;
 	var clientH = screen.height;
 	window.onscroll = function(){
 		searchScroll();
 		var scrollT = document.body.scrollTop;
 		if((scrollT + clientH + 3) > allH){
-			elm.innerHTML = '加载中...';
+			
 			getLoading('J_load','J_infoBox');
 		}else {
-			elm.innerHTML = '上拉加载更多';
+			target.innerHTML = '上拉加载更多';
 		}
 		allH = document.body.offsetHeight;
 	}

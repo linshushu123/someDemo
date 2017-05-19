@@ -2,7 +2,7 @@
 * @Author: miss
 * @Date:   2017-05-19 13:42:19
 * @Last Modified by:   miss
-* @Last Modified time: 2017-05-19 13:57:25
+* @Last Modified time: 2017-05-19 19:59:20
 */
 * {
 	margin: 0;
@@ -41,7 +41,7 @@ h1,h2,h3,h4,h5,h6,i,b {
 	width: 100%;
 	height: 0.85rem;
 	padding: 0.15rem 0 0.15rem 0.25rem;
-	color: #fff;
+	
 }
 .header .search.active {
 	background: #00b38a;
@@ -54,6 +54,7 @@ h1,h2,h3,h4,h5,h6,i,b {
 	background-color: #fff;
 	text-align: center;
 	font-size: 0.2rem;
+	color: #fff;
 	letter-spacing: 0.02rem;
 	-webkit-border-radius: 25px;
 	border-radius: 25px;
@@ -225,7 +226,7 @@ h1,h2,h3,h4,h5,h6,i,b {
 	letter-spacing: 2px;
 }
 .h97 {
-	height: 0.97rem;
+	height: 1.3rem;
 }
 .footer-menu {
 	position: fixed;
