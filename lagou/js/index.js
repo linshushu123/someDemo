@@ -2,7 +2,7 @@
 * @Author: miss
 * @Date:   2017-05-18 16:27:18
 * @Last Modified by:   miss
-* @Last Modified time: 2017-05-18 22:39:07
+* @Last Modified time: 2017-05-19 10:14:40
 */
 //顶部搜索框透明度
 searchScroll();
@@ -55,7 +55,7 @@ ScrollX.prototype = {
 			}
 			elm.style.left = left + moveX + 'px';
 		})
-		document.addEventListener('touchend',function(e){
+		elm.addEventListener('touchend',function(e){
 			left+=moveX;
 
 			if(moveX < 0){
