@@ -2,7 +2,7 @@
 * @Author: miss
 * @Date:   2017-05-18 16:27:18
 * @Last Modified by:   miss
-* @Last Modified time: 2017-05-19 10:20:22
+* @Last Modified time: 2017-05-19 10:49:51
 */
 //顶部搜索框透明度
 searchScroll();
@@ -70,7 +70,13 @@ ScrollX.prototype = {
 				elm.style.transition = 'left 0.5s linear';
 			}
 			left = -1 * that.count * that.screenWidth;
-			
+			if(left < -1 * that.screenWidth * (that.len-1)){
+				left = -1 * that.screenWidth * (that.len-1)
+			}
+			if(left > 0) {
+				left = 0
+			}
+			console.log(that.screenWidth * (that.len-1));
 			elm.style.left = left + 'px';
 			for(var i = 0 ; i < that.len ; i++){
 				that.sportBox.children[i].className = 'sport';
