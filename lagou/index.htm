@@ -213,12 +213,69 @@
          }
          .info .info-con .company-info {
             text-size-adjust: none;
-            font-size: 0.12rem;
+            font-size: 0.16rem;
 
          }
          .info .info-con p .data {
             float: right;
             color: #CFCFCF;
+         }
+         .loading {
+            height: 0.60rem;
+            text-align: center;
+            font-size: 0.2rem;
+            line-height: 0.60rem;
+            letter-spacing: 2px;
+         }
+         .h97 {
+            height: 0.97rem;
+         }
+         .footer-menu {
+            position: fixed;
+            bottom: 0;
+            width: 6.4rem;
+            height: 0.97rem;
+            border-top: 1px solid #E9E9EA;
+            background: #F7F7F8;
+         }
+         .footer-menu .footer-menubox {
+            width: 100%;
+            height: 100%;
+         }
+         .footer-menu .item {
+            float: left;
+            width: 25%;
+            height: 100%;
+            background-size: 100%;
+         }
+         .item1 {
+            background: url(images/home.png) no-repeat center;
+         }
+         .item1.active {
+            background-image: url(images/home-a.png);
+         }
+         .item2 {
+            background: url(images/mession.png) no-repeat center;
+         }
+         .item2.active {
+            background-image: url(images/mession-a.png);
+         }
+         .item3 {
+            background: url(images/job.png) no-repeat center;
+         }
+         .item3.active {
+            background-image: url(images/job-a.png);
+         }
+         .item4 {
+            background: url(images/me.png) no-repeat center;
+         }
+         .item4.active {
+            background-image: url(images/me-a.png);
+         }
+         .footer-menu .item a {
+            display: block;
+            width: 100%;
+            height: 100%;
          }
         </style>
     </head>
@@ -277,7 +334,7 @@
         <h2 class="recommend-title">为你推荐的好职位</h2>
         <!-- 招聘信息 -->
         <div class="info">
-            <ul class="info-box">
+            <ul id="J_infoBox" class="info-box">
                 <li class="item">
                     <div class="logo-pic">
                         <img src="images/lg1.png" height="116" width="116" alt="">
@@ -322,6 +379,19 @@
                         <p class="company-info">不需要融资&nbsp;<i>|</i>&nbsp;500-2000人&nbsp;<i>|</i>&nbsp;移动互联网,游戏</p>
                     </div>
                 </li>
+            </ul>
+        </div>
+        <!-- 加载更多 -->
+        <p id="J_load" class="loading">点击加载更多</p>
+        <!-- 分割线 -->
+        <div class="h97"></div>
+        <!-- 底部nav -->
+        <div class="footer-menu">
+            <ul id="J_footerMenuBox" class="footer-menubox">
+                <li class="item item1 active"><a href="index.htm"></a></li>
+                <li class="item item2"></li>
+                <li class="item item3"></li>
+                <li class="item item4"></li>
             </ul>
         </div>
     </body>

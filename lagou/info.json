@@ -1,0 +1,20 @@
+[
+	{
+		"pic":"images/lg1.png",
+		"jons":"前端实习生",
+		"wage":"3k-4k",
+		"companyName":"闪电购",
+		"address":"杭州&nbsp;西湖区&nbsp;经验不限&nbsp;本科",
+		"date":"05月17日",
+		"companyInfo":"C轮&nbsp;<i>|</i>&nbsp;500-2000人&nbsp;<i>|</i>&nbsp;移动互联网,O2O"
+	},
+	{
+		"pic":"images/lg2.png",
+		"jons":"前端实习生",
+		"wage":"3k-4k",
+		"companyName":"边锋",
+		"address":"杭州&nbsp;西湖区&nbsp;经验不限&nbsp;本科",
+		"date":"05月17日",
+		"companyInfo":"不需要融资&nbsp;<i>|</i>&nbsp;500-2000人&nbsp;<i>|</i>&nbsp;移动互联网,游戏"
+	}
+]

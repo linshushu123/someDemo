@@ -2,7 +2,7 @@
 * @Author: miss
 * @Date:   2017-05-18 16:27:18
 * @Last Modified by:   miss
-* @Last Modified time: 2017-05-19 10:49:51
+* @Last Modified time: 2017-05-19 12:59:34
 */
 //顶部搜索框透明度
 searchScroll();
@@ -90,6 +90,69 @@ ScrollX.prototype = {
 	}
 }
 var banScroll = new ScrollX('J_banner');
+
+//加载更多
+getLoading('J_load','J_infoBox');
+function getLoading(elm,infoBox){
+	var target = document.getElementById(elm);
+	var infoBox = document.getElementById(infoBox);
+	target.addEventListener('touchstart',function(){
+		var template = '';
+		var template_init = '';
+		var reg = /{{(\w+)}}/;
+		ajax('template.htm','get',function(data){
+			template = data;
+			template_init = data;
+		})
+		ajax('info.json','get',function(data){
+
+			var data = JSON.parse(data);
+			var result = '';
+			var strHtml = '';
+			
+			for(var i = 0 ; i < data.length ; i++){
+				template = template_init;
+				while(result = reg.exec(template)){
+					var key = result[1];
+					var value = data[i][key];
+					template = template.replace(result[0],value);
+				}
+				strHtml +=template;
+			}
+			infoBox.innerHTML+=strHtml;
+		})
+	})
+}
+//底部menu点击
+setActive('J_footerMenuBox');
+function setActive(elm){
+	var lists = document.getElementById(elm).children;
+	for(var i = 0 , list ; list = lists[i] ; i++ ){
+		list.onclick = function(){
+			for(var j = 0 ; j < lists.length ; j++){
+				lists[j].className = 'item item' + (j+1);
+			}
+			this.className += ' active';
+		}
+	}
+}
+//ajax封装
+function ajax(url,type,callback){
+	var xhr = new XMLHttpRequest();
+	if(type == 'get'){
+		xhr.open('get',url);
+	}
+	if(type == 'post'){
+		xhr.open('post',url);
+		xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+	}
+	xhr.send();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			callback && callback(xhr.responseText);
+		}
+	}
+}
 //获取样式
 function getStyle(elm,attr){
 	if(elm.currentStyle){
